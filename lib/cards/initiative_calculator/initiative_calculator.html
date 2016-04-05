@@ -1,0 +1,89 @@
+<style>
+  paper-material {
+    border: 1px inset gray;
+    min-width: 300px;
+  }
+
+  paper-input {
+    text-align: center;
+    width: 75px;
+    margin: 5px;
+  }
+
+  paper-checkbox {
+    cursor: default;
+    margin: 3px 0;
+  }
+
+  paper-dropdown-menu {
+    width: 75px;
+    text-align: center;
+  }
+
+  #header {
+    padding: 5px 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-bottom: 1px solid gray;
+    background-color: lightgray;
+    cursor: default;
+  }
+
+  #content {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  #footer {
+    padding: 10px;
+    border-top: 1px solid gray;
+  }
+
+  #speed-factor {
+    margin-top: 10px;
+  }
+</style>
+
+<paper-material elevation="1">
+  <div id="header">Initiative Calculator</div>
+
+  <div id="content" class="layout vertical">
+    <div class="layout horizontal">
+      <paper-input #initRollInput [(value)]="initRoll.inputValue" label="Roll"
+                   required allowed-pattern="[0-9]" maxlength="2">
+      </paper-input>
+
+      <paper-input #dexModInput [(value)]="dexMod.inputValue" label="DEX Mod"
+                   required allowed-pattern="[-+0-9]" maxlength="2">
+      </paper-input>
+    </div>
+
+    <div id="speed-factor" class="layout vertical">
+      <paper-checkbox [(checked)]="meleeHeavy.active">{{meleeHeavy.name}}</paper-checkbox>
+      <paper-checkbox [(checked)]="meleeLight.active">{{meleeLight.name}}</paper-checkbox>
+      <paper-checkbox [(checked)]="meleeTwoHanded.active">{{meleeTwoHanded.name}}</paper-checkbox>
+      <paper-checkbox [(checked)]="rangedLoading.active">{{rangedLoading.name}}</paper-checkbox>
+
+      <div class="layout horizontal end">
+        <paper-checkbox [(checked)]="spellcasting.active" style="margin-bottom: 5px;">{{spellcasting.name}}</paper-checkbox>
+        <paper-dropdown-menu label="Level" style="margin-left: 10px;">
+          <paper-menu class="dropdown-content" attr-for-selected="data-value" selected="-7">
+            <paper-item data-value="-1">1st</paper-item>
+            <paper-item data-value="-2">2nd</paper-item>
+            <paper-item data-value="-3">3rd</paper-item>
+            <paper-item data-value="-4">4th</paper-item>
+            <paper-item data-value="-5">5th</paper-item>
+            <paper-item data-value="-6">6th</paper-item>
+            <paper-item data-value="-7">7th</paper-item>
+            <paper-item data-value="-8">8th</paper-item>
+            <paper-item data-value="-9">9th</paper-item>
+          </paper-menu>
+        </paper-dropdown-menu>
+
+        <!--([selected])="spellcasting.value"-->
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">Initiative Total: {{initTotal.value}}</div>
+</paper-material>

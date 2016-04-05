@@ -1,0 +1,25 @@
+<style>
+  .content {
+    padding: 15px;
+    background-color: #F8F8F8;
+  }
+
+  .app-title {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+  }
+</style>
+
+<paper-header-panel class="flex">
+  <paper-toolbar>
+    <!--<div class="flex-auto"><div style="width: 40px; height: 40px;"></div></div>-->
+    <h2 class="app-title flex-auto">RPG Wiz</h2>
+    <!--<div class="flex-auto" style="text-align: right;">-->
+      <!--<paper-icon-button icon="refresh" (click)="newGame()"></paper-icon-button>-->
+    <!--</div>-->
+  </paper-toolbar>
+
+  <div class="fit layout vertical center content">
+    <initiative-calculator></initiative-calculator>
+  </div>
+</paper-header-panel>
