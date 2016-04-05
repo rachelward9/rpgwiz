@@ -11,6 +11,7 @@ import 'package:polymer_elements/paper_item.dart';
 import '../../directives/paper_input_value_dir.dart';
 import '../../directives/paper_checkbox_checked_dir.dart';
 import '../../directives/paper_menu_selected_dir.dart';
+import '../../pipes/pad_left_plus.dart';
 import '../../models/operand.dart';
 import '../../models/calculated_entry.dart';
 
@@ -19,15 +20,17 @@ import '../../models/calculated_entry.dart';
     templateUrl: 'initiative_calculator.html',
     directives: const [
       PaperInputValueDirective,
-      PaperCheckboxCheckedDirective
-    ]
+      PaperCheckboxCheckedDirective,
+      PaperMenuSelectedDirective
+    ],
+    pipes: const [PadLeftPlus]
 )
 class InitiativeCalculator {
   final Logger _log;
 
   Operand initRoll = new Operand("Initiative Roll", value: null, active: true);
   Operand dexMod = new Operand("DEX Modifier", value: null, active: true);
-  Operand size = new Operand("Size");
+  Operand size = new Operand("Creature Size");
   Operand meleeHeavy = new Operand("Melee, heavy weapon", value: -2);
   Operand meleeLight = new Operand("Melee, light or finesse weapon", value: 2);
   Operand meleeTwoHanded = new Operand("Melee, two-handed weapon", value: -2);
@@ -37,18 +40,18 @@ class InitiativeCalculator {
 
   CalculatedEntry initTotal = new CalculatedEntry("Initiative");
 
-  String test;
-
   InitiativeCalculator(Logger this._log) {
     _log.info("$runtimeType()");
 
-    initTotal
-      ..add(initRoll)
-      ..add(dexMod)
-      ..add(meleeHeavy)
-      ..add(meleeLight)
-      ..add(meleeTwoHanded)
-      ..add(rangedLoading)
-      ..add(spellcasting);
+    initTotal.addAll([
+      initRoll,
+      dexMod,
+      meleeHeavy,
+      meleeLight,
+      meleeTwoHanded,
+      rangedLoading,
+      spellcasting,
+      size
+    ]);
   }
 }

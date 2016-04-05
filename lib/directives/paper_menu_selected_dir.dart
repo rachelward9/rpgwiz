@@ -7,7 +7,6 @@ class PaperMenuSelectedDirective {
 
   @HostListener('iron-select', const ['\$event'])
   void onChange(e) {
-    print("${convertToDart(e).currentTarget.selected}");
+    selectedChange.add(convertToDart(e).currentTarget.selected);
   }
-//      selectedChange.add(convertToDart(e).currentTarget.selected);
 }

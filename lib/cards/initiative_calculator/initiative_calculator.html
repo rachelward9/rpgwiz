@@ -16,8 +16,8 @@
   }
 
   paper-dropdown-menu {
-    width: 75px;
-    text-align: center;
+    /*text-align: center;*/
+    font-size: 0.8em;
   }
 
   #header {
@@ -42,6 +42,19 @@
   #speed-factor {
     margin-top: 10px;
   }
+
+  #spell-level-dd {
+    width: 65px;
+  }
+
+  #size-dd {
+    width: 110px;
+  }
+
+  .multi-option-checkbox {
+    margin-bottom: 7px;
+    width: 120px;
+  }
 </style>
 
 <paper-material elevation="1">
@@ -49,7 +62,7 @@
 
   <div id="content" class="layout vertical">
     <div class="layout horizontal">
-      <paper-input #initRollInput [(value)]="initRoll.inputValue" label="Roll"
+      <paper-input #initRollInput [(value)]="initRoll.inputValue" label="Roll (d20)"
                    required allowed-pattern="[0-9]" maxlength="2">
       </paper-input>
 
@@ -59,28 +72,60 @@
     </div>
 
     <div id="speed-factor" class="layout vertical">
-      <paper-checkbox [(checked)]="meleeHeavy.active">{{meleeHeavy.name}}</paper-checkbox>
-      <paper-checkbox [(checked)]="meleeLight.active">{{meleeLight.name}}</paper-checkbox>
-      <paper-checkbox [(checked)]="meleeTwoHanded.active">{{meleeTwoHanded.name}}</paper-checkbox>
-      <paper-checkbox [(checked)]="rangedLoading.active">{{rangedLoading.name}}</paper-checkbox>
-
-      <div class="layout horizontal end">
-        <paper-checkbox [(checked)]="spellcasting.active" style="margin-bottom: 5px;">{{spellcasting.name}}</paper-checkbox>
-        <paper-dropdown-menu label="Level" style="margin-left: 10px;">
-          <paper-menu class="dropdown-content" attr-for-selected="data-value" selected="-7">
-            <paper-item data-value="-1">1st</paper-item>
-            <paper-item data-value="-2">2nd</paper-item>
-            <paper-item data-value="-3">3rd</paper-item>
-            <paper-item data-value="-4">4th</paper-item>
-            <paper-item data-value="-5">5th</paper-item>
-            <paper-item data-value="-6">6th</paper-item>
-            <paper-item data-value="-7">7th</paper-item>
-            <paper-item data-value="-8">8th</paper-item>
-            <paper-item data-value="-9">9th</paper-item>
-          </paper-menu>
-        </paper-dropdown-menu>
-
-        <!--([selected])="spellcasting.value"-->
+      <div class="layout horizontal justified">
+        <paper-checkbox [(checked)]="meleeHeavy.active">{{meleeHeavy.name}}</paper-checkbox>
+        <span>{{meleeHeavy.value}}</span>
+      </div>
+      <div class="layout horizontal justified">
+        <paper-checkbox [(checked)]="meleeLight.active">{{meleeLight.name}}</paper-checkbox>
+        <span>{{meleeLight.value | padLeftPlus}}</span>
+      </div>
+      <div class="layout horizontal justified">
+        <paper-checkbox [(checked)]="meleeTwoHanded.active">{{meleeTwoHanded.name}}</paper-checkbox>
+        <span>{{meleeTwoHanded.value}}</span>
+      </div>
+      <div class="layout horizontal justified">
+        <paper-checkbox [(checked)]="rangedLoading.active">{{rangedLoading.name}}</paper-checkbox>
+        <span>{{rangedLoading.value}}</span>
+      </div>
+      <div class="layout horizontal justified end">
+        <div class="layout horizontal end">
+          <div class="multi-option-checkbox">
+            <paper-checkbox [(checked)]="spellcasting.active">{{spellcasting.name}}</paper-checkbox>
+          </div>
+          <paper-dropdown-menu id="spell-level-dd" label="Level" style="margin-left: 10px;">
+            <paper-menu class="dropdown-content" attr-for-selected="data-value" [(selected)]="spellcasting.inputValue">
+              <paper-item data-value="-1">1st</paper-item>
+              <paper-item data-value="-2">2nd</paper-item>
+              <paper-item data-value="-3">3rd</paper-item>
+              <paper-item data-value="-4">4th</paper-item>
+              <paper-item data-value="-5">5th</paper-item>
+              <paper-item data-value="-6">6th</paper-item>
+              <paper-item data-value="-7">7th</paper-item>
+              <paper-item data-value="-8">8th</paper-item>
+              <paper-item data-value="-9">9th</paper-item>
+            </paper-menu>
+          </paper-dropdown-menu>
+        </div>
+        <span style="margin-bottom: 7px;">{{spellcasting.value}}</span>
+      </div>
+      <div class="layout horizontal justified end">
+        <div class="layout horizontal end">
+          <div class="multi-option-checkbox">
+            <paper-checkbox [(checked)]="size.active">{{size.name}}</paper-checkbox>
+          </div>
+          <paper-dropdown-menu id="size-dd" label="Size" style="margin-left: 10px;">
+            <paper-menu class="dropdown-content" attr-for-selected="data-value" [(selected)]="size.inputValue">
+              <paper-item data-value="5">Tiny</paper-item>
+              <paper-item data-value="2">Small</paper-item>
+              <paper-item data-value="0">Medium</paper-item>
+              <paper-item data-value="-2">Large</paper-item>
+              <paper-item data-value="-5">Huge</paper-item>
+              <paper-item data-value="-8">Gargantuan</paper-item>
+            </paper-menu>
+          </paper-dropdown-menu>
+        </div>
+        <span style="margin-bottom: 7px;">{{size.value | padLeftPlus}}</span>
       </div>
     </div>
   </div>
