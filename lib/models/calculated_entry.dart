@@ -41,12 +41,19 @@ class CalculatedEntry {
   }
 
   void calculate() {
-    List<num> activeValues = operands.keys
-        .where((Operand op) => op.active && op.value != null)
+    List<num> activeValues = activeOps
         .map((Operand op) => op.value)
         .toList();
 
     // calculate sum
     value = activeValues.isNotEmpty ? activeValues.reduce((num totalValue, num currentValue) => totalValue + currentValue) : null;
+  }
+
+  List<Operand> get activeOps => operands.keys.where((Operand op) => op.active && op.value != null).toList();
+
+  @override String toString() {
+    StringBuffer sb = new StringBuffer("$name${value != null ? ': $value': ''}\n");
+    activeOps.forEach((Operand op) => sb.writeln("  $op"));
+    return sb.toString();
   }
 }

@@ -1,12 +1,14 @@
 import 'package:angular2/angular2.dart';
 import 'package:logging/logging.dart';
 import 'package:polymer_elements/iron_flex_layout/classes/iron_flex_layout.dart';
+import 'package:polymer_elements/iron_icons.dart';
 import 'package:polymer_elements/paper_material.dart';
 import 'package:polymer_elements/paper_input.dart';
 import 'package:polymer_elements/paper_checkbox.dart';
 import 'package:polymer_elements/paper_dropdown_menu.dart';
 import 'package:polymer_elements/paper_menu.dart';
 import 'package:polymer_elements/paper_item.dart';
+import 'package:polymer_elements/paper_icon_button.dart';
 
 import '../../directives/paper_input_value_dir.dart';
 import '../../directives/paper_checkbox_checked_dir.dart';
@@ -51,7 +53,12 @@ class InitiativeCalculator {
       meleeTwoHanded,
       rangedLoading,
       spellcasting,
-      size
+      size,
+      other
     ]);
+  }
+
+  void output() {
+    _log.info("$initTotal");
   }
 }

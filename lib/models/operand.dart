@@ -1,8 +1,9 @@
 import 'dart:async';
 
 class Operand {
-  final String name;
-  String notes;
+  final String type;
+  String subtype;
+  String description;
   num _value;
   bool _active;
 
@@ -10,7 +11,7 @@ class Operand {
 
   StreamController _onChange = new StreamController.broadcast();
 
-  Operand(this.name, {value, active: false}) : _value = value, _active = active;
+  Operand(this.type, {num value, bool active: false}) : _value = value, _active = active;
 
   num get value => _value;
   void set value(num data) {
@@ -32,5 +33,5 @@ class Operand {
 
   Stream get onChange => _onChange.stream;
 
-  @override String toString() => "$name${notes != null ? ' ($notes)': ''}: $_value";
+  @override String toString() => "$type${subtype != null ? ' ($subtype)': ''}: ${_value.toString().padLeft(2, '+')}";
 }

@@ -20,6 +20,10 @@
     font-size: 0.8em;
   }
 
+  paper-icon-button {
+    cursor: default;
+  }
+
   #header {
     padding: 5px 10px;
     font-size: 1.2em;
@@ -62,39 +66,36 @@
 
   <div id="content" class="layout vertical">
     <div class="layout horizontal">
-      <paper-input #initRollInput [(value)]="initRoll.inputValue" label="Roll (d20)"
-                   required allowed-pattern="[0-9]" maxlength="2">
-      </paper-input>
+      <paper-input [(value)]="initRoll.inputValue" label="Roll (d20)" allowed-pattern="[0-9]" maxlength="2"></paper-input>
 
-      <paper-input #dexModInput [(value)]="dexMod.inputValue" label="DEX Mod"
-                   required allowed-pattern="[-+0-9]" maxlength="2">
-      </paper-input>
+      <paper-input [(value)]="dexMod.inputValue" label="DEX Mod" allowed-pattern="[-+0-9]" maxlength="2"></paper-input>
     </div>
 
     <div id="speed-factor" class="layout vertical">
       <div class="layout horizontal justified">
-        <paper-checkbox [(checked)]="meleeHeavy.active">{{meleeHeavy.name}}</paper-checkbox>
+        <paper-checkbox [(checked)]="meleeHeavy.active">{{meleeHeavy.type}}</paper-checkbox>
         <span>{{meleeHeavy.value}}</span>
       </div>
       <div class="layout horizontal justified">
-        <paper-checkbox [(checked)]="meleeLight.active">{{meleeLight.name}}</paper-checkbox>
+        <paper-checkbox [(checked)]="meleeLight.active">{{meleeLight.type}}</paper-checkbox>
         <span>{{meleeLight.value | padLeftPlus}}</span>
       </div>
       <div class="layout horizontal justified">
-        <paper-checkbox [(checked)]="meleeTwoHanded.active">{{meleeTwoHanded.name}}</paper-checkbox>
+        <paper-checkbox [(checked)]="meleeTwoHanded.active">{{meleeTwoHanded.type}}</paper-checkbox>
         <span>{{meleeTwoHanded.value}}</span>
       </div>
       <div class="layout horizontal justified">
-        <paper-checkbox [(checked)]="rangedLoading.active">{{rangedLoading.name}}</paper-checkbox>
+        <paper-checkbox [(checked)]="rangedLoading.active">{{rangedLoading.type}}</paper-checkbox>
         <span>{{rangedLoading.value}}</span>
       </div>
       <div class="layout horizontal justified end">
         <div class="layout horizontal end">
           <div class="multi-option-checkbox">
-            <paper-checkbox [(checked)]="spellcasting.active">{{spellcasting.name}}</paper-checkbox>
+            <paper-checkbox [(checked)]="spellcasting.active">{{spellcasting.type}}</paper-checkbox>
           </div>
           <paper-dropdown-menu id="spell-level-dd" label="Level" style="margin-left: 10px;">
-            <paper-menu class="dropdown-content" attr-for-selected="data-value" [(selected)]="spellcasting.inputValue">
+            <paper-menu #spellcastingMenu class="dropdown-content" attr-for-selected="data-value"
+                        [(selected)]="spellcasting.inputValue" (iron-select)="spellcasting.subtype = spellcastingMenu.selectedItem.text">
               <paper-item data-value="-1">1st</paper-item>
               <paper-item data-value="-2">2nd</paper-item>
               <paper-item data-value="-3">3rd</paper-item>
@@ -112,10 +113,11 @@
       <div class="layout horizontal justified end">
         <div class="layout horizontal end">
           <div class="multi-option-checkbox">
-            <paper-checkbox [(checked)]="size.active">{{size.name}}</paper-checkbox>
+            <paper-checkbox [(checked)]="size.active">{{size.type}}</paper-checkbox>
           </div>
           <paper-dropdown-menu id="size-dd" label="Size" style="margin-left: 10px;">
-            <paper-menu class="dropdown-content" attr-for-selected="data-value" [(selected)]="size.inputValue">
+            <paper-menu #sizeMenu class="dropdown-content" attr-for-selected="data-value"
+                        [(selected)]="size.inputValue" (iron-select)="size.subtype = sizeMenu.selectedItem.text">
               <paper-item data-value="5">Tiny</paper-item>
               <paper-item data-value="2">Small</paper-item>
               <paper-item data-value="0">Medium</paper-item>
@@ -127,8 +129,20 @@
         </div>
         <span style="margin-bottom: 7px;">{{size.value | padLeftPlus}}</span>
       </div>
+      <div class="layout horizontal justified end">
+        <div class="layout horizontal end">
+          <div class="multi-option-checkbox">
+            <paper-checkbox [(checked)]="other.active">{{other.type}}</paper-checkbox>
+          </div>
+        </div>
+        <paper-input [(value)]="other.inputValue" label="Mod" allowed-pattern="[-+0-9]" maxlength="2"></paper-input>
+        <!--<span style="margin-bottom: 7px;">{{size.value | padLeftPlus}}</span>-->
+      </div>
     </div>
   </div>
 
-  <div id="footer">Initiative Total: {{initTotal.value}}</div>
+  <div id="footer" class="layout horizontal center justified">
+    <span>Initiative: {{initTotal.value}}</span>
+    <paper-icon-button icon="cloud-upload" (click)="output()"></paper-icon-button>
+  </div>
 </paper-material>
