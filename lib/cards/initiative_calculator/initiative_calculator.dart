@@ -14,6 +14,7 @@ import '../../directives/paper_input_value_dir.dart';
 import '../../directives/paper_checkbox_checked_dir.dart';
 import '../../directives/paper_menu_selected_dir.dart';
 import '../../pipes/pad_left_plus.dart';
+import '../../services/user.dart';
 import '../../services/database.dart';
 import '../../models/operand.dart';
 import '../../models/calculated_entry.dart';
@@ -30,6 +31,7 @@ import '../../models/calculated_entry.dart';
 )
 class InitiativeCalculator {
   final Logger _log;
+  final User user;
   final Database _db;
 
   Operand initRoll = new Operand("Initiative Roll", value: null, active: true);
@@ -44,7 +46,7 @@ class InitiativeCalculator {
 
   CalculatedEntry initTotal = new CalculatedEntry("Initiative");
 
-  InitiativeCalculator(Logger this._log, Database this._db) {
+  InitiativeCalculator(Logger this._log, User this.user, Database this._db) {
     _log.info("$runtimeType()");
 
     initTotal.addAll([

@@ -8,11 +8,12 @@ import 'package:polymer_elements/paper_input.dart';
 import '../../services/user.dart';
 import '../../services/database.dart';
 import '../../cards/initiative_calculator/initiative_calculator.dart';
+import '../../cards/output_view/output_view.dart';
 
 @Component(selector: 'main-app',
     encapsulation: ViewEncapsulation.Native,
     templateUrl: 'main_app.html',
-    directives: const [InitiativeCalculator],
+    directives: const [InitiativeCalculator, OutputView],
     providers: const [User, Database]
 )
 class MainApp {

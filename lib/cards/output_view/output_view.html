@@ -1,0 +1,21 @@
+<style>
+  paper-material {
+    border: 1px inset gray;
+    width: 300px;
+    height: 495px;
+    overflow-y: auto;
+  }
+
+  .message-block {
+    margin: 5px;
+    border: 1px inset lightgray;
+    padding: 5px;
+  }
+</style>
+
+<paper-material elevation="1" class="layout vertical" (dblclick)="clear()">
+  <div class="message-block" *ngFor="#message of messages">
+    <strong>{{message['name']}}:</strong>
+    {{message['message']}}
+  </div>
+</paper-material>

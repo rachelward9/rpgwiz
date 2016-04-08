@@ -16,7 +16,6 @@
   }
 
   paper-dropdown-menu {
-    /*text-align: center;*/
     font-size: 0.8em;
   }
 
@@ -142,6 +141,8 @@
 
   <div id="footer" class="layout horizontal center justified">
     <span>Initiative: {{initTotal.value}}</span>
-    <paper-icon-button icon="cloud-upload" (click)="output()"></paper-icon-button>
+    <paper-icon-button icon="cloud-upload" (click)="output()"
+                       [disabled]="user.characterName == null || user.characterName.isEmpty || initRoll.value == null">
+    </paper-icon-button>
   </div>
 </paper-material>
