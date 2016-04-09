@@ -13,9 +13,13 @@
   }
 </style>
 
-<paper-material elevation="1" class="layout vertical" (dblclick)="clear()">
-  <div class="message-block" *ngFor="#message of messages">
-    <strong>{{message['name']}}:</strong>
+<paper-material elevation="1" class="layout vertical" (click)="clear($event)">
+  <!--<div class="message-block" *ngFor="#message of messages">-->
+    <!--<strong>{{message['name']}}:</strong>-->
+    <!--{{message['message']}}-->
+  <!--</div>-->
+  <fieldset *ngFor="#message of messages">
+    <legend><strong>{{message['name']}}</strong></legend>
     {{message['message']}}
-  </div>
+  </fieldset>
 </paper-material>

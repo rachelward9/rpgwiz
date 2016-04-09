@@ -1,13 +1,13 @@
 <style>
   paper-material {
     border: 1px inset gray;
-    min-width: 300px;
+    min-width: 325px;
   }
 
   paper-input {
     text-align: center;
     width: 75px;
-    margin: 5px;
+    margin: 0 5px;
   }
 
   paper-checkbox {
@@ -20,7 +20,7 @@
   }
 
   paper-icon-button {
-    cursor: default;
+    cursor: default !important;
   }
 
   #header {
@@ -37,16 +37,11 @@
     margin-bottom: 10px;
   }
 
-  #footer {
-    padding: 10px;
-    border-top: 1px solid gray;
-  }
-
   #speed-factor {
     margin-top: 10px;
   }
 
-  #spell-level-dd {
+  #spell-level-dd, #other-dd {
     width: 65px;
   }
 
@@ -54,23 +49,40 @@
     width: 110px;
   }
 
+  #other-dd {
+    text-align: right;
+  }
+
   .multi-option-checkbox {
     margin-bottom: 7px;
     width: 120px;
   }
+
+  .badge {
+    font-size: 2em !important;
+  }
 </style>
 
 <paper-material elevation="1">
-  <div id="header">Initiative Calculator</div>
+  <div id="header" class="layout horizontal center justified">
+    <span>Initiative Calculator</span>
+    <paper-icon-button icon="cloud-upload" (click)="output()"
+                       [disabled]="user.characterName == null || user.characterName.isEmpty || initRoll.value == null">
+    </paper-icon-button>
+  </div>
 
   <div id="content" class="layout vertical">
-    <div class="layout horizontal">
-      <paper-input [(value)]="initRoll.inputValue" label="Roll (d20)" allowed-pattern="[0-9]" maxlength="2"></paper-input>
+    <div class="layout horizontal center justified well well-sm">
+      <div class="layout horizontal">
+        <paper-input [(value)]="initRoll.inputValue" label="Roll (d20)" allowed-pattern="[0-9]" maxlength="2"></paper-input>
 
-      <paper-input [(value)]="dexMod.inputValue" label="DEX Mod" allowed-pattern="[-+0-9]" maxlength="2"></paper-input>
+        <paper-input [(value)]="dexMod.inputValue" label="DEX Mod" allowed-pattern="[-+0-9]" maxlength="2"></paper-input>
+      </div>
+      <span class="badge">{{initTotal.value}}</span>
     </div>
 
-    <div id="speed-factor" class="layout vertical">
+    <fieldset id="speed-factor" class="layout vertical">
+      <legend><strong>Speed Factor Variant</strong></legend>
       <div class="layout horizontal justified">
         <paper-checkbox [(checked)]="meleeHeavy.active">{{meleeHeavy.type}}</paper-checkbox>
         <span>{{meleeHeavy.value}}</span>
@@ -134,15 +146,16 @@
             <paper-checkbox [(checked)]="other.active">{{other.type}}</paper-checkbox>
           </div>
         </div>
-        <paper-input [(value)]="other.inputValue" label="Mod" allowed-pattern="[-+0-9]" maxlength="2"></paper-input>
+        <paper-dropdown-menu id="other-dd" label="Mod" style="margin-left: 10px;">
+          <paper-menu #otherMenu class="dropdown-content" attr-for-selected="data-value"
+                      [(selected)]="other.inputValue">
+            <paper-item data-value="-5">-5</paper-item>
+            <paper-item data-value="-2">-2</paper-item>
+            <paper-item data-value="2">+2</paper-item>
+            <paper-item data-value="5">+5</paper-item>
+          </paper-menu>
+        </paper-dropdown-menu>
       </div>
-    </div>
-  </div>
-
-  <div id="footer" class="layout horizontal center justified">
-    <span>Initiative: {{initTotal.value}}</span>
-    <paper-icon-button icon="cloud-upload" (click)="output()"
-                       [disabled]="user.characterName == null || user.characterName.isEmpty || initRoll.value == null">
-    </paper-icon-button>
+    </fieldset>
   </div>
 </paper-material>

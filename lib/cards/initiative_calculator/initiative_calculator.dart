@@ -27,7 +27,8 @@ import '../../models/calculated_entry.dart';
       PaperCheckboxCheckedDirective,
       PaperMenuSelectedDirective
     ],
-    pipes: const [PadLeftPlus]
+    pipes: const [PadLeftPlus],
+    styleUrls: const ['../../styles/bootstrap.min.css']
 )
 class InitiativeCalculator {
   final Logger _log;

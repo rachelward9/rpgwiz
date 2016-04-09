@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:angular2/angular2.dart';
 import 'package:logging/logging.dart';
 import 'package:polymer_elements/iron_flex_layout/classes/iron_flex_layout.dart';
@@ -24,10 +26,12 @@ class OutputView {
     });
   }
 
-  void clear() {
+  void clear(MouseEvent event) {
     _log.info("$runtimeType()::clear()");
 
-    messages.clear();
-    _db.clearOutput();
+    if (event.altKey) {
+      messages.clear();
+      _db.clearOutput();
+    }
   }
 }
