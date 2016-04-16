@@ -5,7 +5,8 @@ import 'package:polymer_elements/paper_material.dart';
 
 @Component(selector: 'app-card',
     encapsulation: ViewEncapsulation.Native,
-    templateUrl: 'app_card.html'
+    templateUrl: 'app_card.html',
+    styleUrls: const ["../styles/fonts.css"]
 )
 class AppCard {
   final Logger _log;

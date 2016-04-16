@@ -5,15 +5,25 @@
 
   paper-material {
     border: 1px inset gray;
+    min-width: 325px;
+    height: 500px;
   }
 
   #header {
     padding: 5px 10px;
-    font-size: 1.2em;
-    font-weight: bold;
+    /*font-size: 1.2em;*/
+    /*font-weight: bold;*/
     border-bottom: 1px solid gray;
-    background-color: lightgray;
+    /*background-color: lightgray;*/
     cursor: default;
+
+    margin-top: .2em;
+    margin-bottom: .2em;
+    font-family: MrJeeves;
+    font-weight: 800;
+    color: #58180D;
+    font-size: 28pt;
+
   }
 
   #content {
@@ -24,8 +34,10 @@
 
 <paper-material elevation="1" class="layout vertical">
   <div id="header">
+    Header
   </div>
 
   <div id="content" class="layout vertical">
+    Content stuff.
   </div>
 </paper-material>

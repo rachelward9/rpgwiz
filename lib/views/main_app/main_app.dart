@@ -9,11 +9,12 @@ import '../../services/user.dart';
 import '../../services/database.dart';
 import '../../cards/initiative_calculator/initiative_calculator.dart';
 import '../../cards/output_view/output_view.dart';
+import '../../components/app_card.dart';
 
 @Component(selector: 'main-app',
     encapsulation: ViewEncapsulation.Native,
     templateUrl: 'main_app.html',
-    directives: const [InitiativeCalculator, OutputView],
+    directives: const [InitiativeCalculator, OutputView, AppCard],
     providers: const [User, Database]
 )
 class MainApp {
