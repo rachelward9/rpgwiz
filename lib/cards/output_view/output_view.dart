@@ -24,13 +24,18 @@ class OutputView {
     _db.fbOutput.onChildAdded.listen((FB.Event event) {
       messages.add(event.snapshot.val());
     });
+
+    _db.fbOutput.onChildRemoved.listen((FB.Event event) {
+      if (messages.isNotEmpty) {
+        messages.clear();
+      }
+    });
   }
 
   void clear(MouseEvent event) {
     _log.info("$runtimeType()::clear()");
 
     if (event.altKey) {
-      messages.clear();
       _db.clearOutput();
     }
   }
